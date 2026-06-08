@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.header {
+    padding: 1rem;
+    text-align: center;
+}
+
+.item-container {
+    padding: 1rem;
+}
+
+.item-card {
+    border: 1px solid black;
+    padding: 1rem 0 1rem 1rem;
+    margin-bottom: 1rem;
+}
