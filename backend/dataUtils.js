@@ -28,5 +28,13 @@ export const combineData = (mapping, latestPrices) => {
     ...latestPrices.data[String(item.id)],
   }));
 
-  return prices;
+  const finalData = prices.map(item => ({
+    ...item,
+    highAlchProfitHigh: item.highalch - item.high,
+    highAlchProfitLow: item.highalch - item.low,
+    medianBuyPrice: Math.floor((item.high + item.low) / 2)
+  }))
+
+  // console.log(finalData.slice(0, 10))
+  return finalData;
 };

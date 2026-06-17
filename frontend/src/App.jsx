@@ -1,46 +1,16 @@
-import { useState, useEffect } from 'react';
-import ItemCard from './components/ItemCard';
+import { Routes, Route } from 'react-router';
+import HomePage from './pages/HomePage';
+import SavedEntriesPage from './pages/SavedEntriesPage';
+import Header from './components/Header';
 
 const App = () => {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const res = await fetch('http://localhost:8000/api/items');
-        if (!res.ok) throw new Error('API callout failure');
-        const data = await res.json();
-        setItems(data);
-      } catch (error) {
-        console.log(error.message);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchItems();
-  }, []);
-
   return (
     <>
-      <header className='header'>
-        <h1>Bank Stander</h1>
-      </header>
-      <main>
-        {loading && <p>Loading...</p>}
-        {error && <div className='error'>{error}</div>}
-
-        {!loading && !error && (
-          <div className='item-container'>
-            {items.map((item) => (
-              <ItemCard key={item.id} item={item} />
-            ))}
-          </div>
-        )}
-      </main>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/entries' element={<SavedEntriesPage />} />
+      </Routes>
     </>
   );
 };
