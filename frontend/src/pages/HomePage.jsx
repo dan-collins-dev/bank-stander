@@ -1,30 +1,20 @@
-import { useState, useCallback } from 'react';
 import { useItems } from '../context/ItemContext';
-import TrackerForm from '../components/TrackerForm';
-import TrackerResult from '../components/TrackerResult';
+import ItemCard from '../components/ItemCard';
 
 const HomePage = () => {
-  const { loading, error } = useItems();
-  const [trackerResult, setTrackerResult] = useState(null);
+  const { loading, error, items } = useItems();
 
-  const handleFormChange = useCallback(() => {
-    setTrackerResult(null);
-  }, [setTrackerResult]);
-
+  console.log(items)
   return (
     <>
       {loading && <p>Loading...</p>}
       {error && <div className='error'>{error.message || String(error)}</div>}
       <main>
-        <section>
-          <TrackerForm
-            onResult={setTrackerResult}
-            onFormChange={handleFormChange}
-          />
-        </section>
-        <section>
-          <TrackerResult response={trackerResult} />
-        </section>
+        {
+          items.map(item => (
+            <ItemCard key={item.id} item={item} />
+          ))
+        }
       </main>
     </>
   );

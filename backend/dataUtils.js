@@ -5,7 +5,7 @@ export const getMappingData = async () => {
     );
     if (!res.ok) throw new Error('Request to /mapping failed.');
     const data = await res.json();
-    return data;
+    return data.filter(item => item.members !== true);
   } catch (err) {
     console.error(err.message);
   }
@@ -35,6 +35,5 @@ export const combineData = (mapping, latestPrices) => {
     medianBuyPrice: Math.floor((item.high + item.low) / 2)
   }))
 
-  // console.log(finalData.slice(0, 10))
   return finalData;
 };
