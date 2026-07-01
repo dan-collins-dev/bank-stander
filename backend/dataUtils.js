@@ -16,6 +16,7 @@ export const getLatestPriceData = async () => {
     const res = await fetch('https://prices.runescape.wiki/api/v1/osrs/latest');
     if (!res.ok) throw new Error('Request to /latest failed.');
     const data = await res.json();
+    console.log(typeof data.data)
     return data;
   } catch (err) {
     console.error(err.message);
